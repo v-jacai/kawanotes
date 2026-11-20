@@ -1,0 +1,250 @@
+/* ───────── базове ───────── */
+html, body { margin: 0 !important; overflow-x: hidden; }
+
+/* налаштовувані розміри */
+:root{
+    --sidebar-width: 19rem;
+    --gutter-left: 40px;   /* більше НЕ використовується для main */
+    --gutter-right: 10px;  /* більше НЕ використовується для main */
+    --sidebar-pad: 40px;
+
+    /* крок індентації пунктів меню */
+    --nav-indent-step: .9rem;
+}
+
+/* не обмежуємо контент штучними max-width */
+.page, .page-content, .main-content, .content,
+.docs-content, .td-content, .td-main { max-width: none !important; }
+
+/* ───────── лівий сайдбар ───────── */
+@media (min-width: 50rem){
+    .side-bar{
+        align-items: flex-start !important;
+        width: var(--sidebar-width) !important;
+        padding-left: var(--sidebar-pad) !important;
+        background: none !important;
+    }
+    .side-bar .site-header,
+    .side-bar .site-title,
+    .side-bar .site-logo,
+    .side-bar nav, .side-bar nav ul{
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+    }
+
+    /* індентація ЛИШЕ в навігації */
+    .side-bar .nav-list > .nav-list-item > .nav-list-link{
+        padding-left: var(--nav-indent-step) !important;
+    }
+    .side-bar .nav-list .nav-list > .nav-list-item > .nav-list-link{
+        padding-left: calc(var(--nav-indent-step) * 2) !important;
+    }
+    .side-bar .nav-list .nav-list .nav-list > .nav-list-item > .nav-list-link{
+        padding-left: calc(var(--nav-indent-step) * 3) !important;
+    }
+    .side-bar .nav-list .nav-list .nav-list .nav-list > .nav-list-item > .nav-list-link,
+    .side-bar .nav-list .nav-list .nav-list .nav-list .nav-list > .nav-list-item > .nav-list-link{
+        padding-left: calc(var(--nav-indent-step) * 4) !important;
+    }
+
+    .side-bar .nav-list .nav-list-item > .nav-list-expander{
+        margin-left: 0 !important;
+    }
+}
+
+/* ───────── основна колонка + пошук ───────── */
+@media (min-width: 50rem){
+    .main{
+        margin-left: var(--sidebar-width) !important;
+        width: calc(100% - var(--sidebar-width)) !important;
+        max-width: none !important;
+        padding: 0 !important;
+    }
+
+    /* ВАЖЛИВО: повертаємо як було — без додаткових відступів */
+    .main-header,
+    .main-content,
+    #main-content{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .main-header .search,
+    .main-header .search-input-wrap{
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+        box-sizing: border-box !important;
+    }
+    .main-header input[type="search"]{
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* ───────── запобіжники ───────── */
+img, video, canvas, svg { max-width: 100%; height: auto; }
+pre { overflow-x: auto; }
+table { width: 100%; display: block; overflow-x: auto; }
+
+/* якщо десь лишився старий full-bleed клас */
+.full-width-content { width: auto !important; margin: 0 !important; max-width: none !important; }
+
+body { font-family: 'Inter', sans-serif; color: #111117; }
+
+/* посилання */
+a { color: #473982; text-decoration: none; }
+a:hover { color: #312759; text-decoration: underline; }
+
+/* бренд */
+:root{ --brand:#473982; --brand-hover:#312759; }
+
+a.btn, .btn, a.button, .button, .cta {
+    background: var(--brand) !important;
+    background-image: none !important;
+    border-color: var(--brand) !important;
+    color: #fff !important;
+}
+a.btn:hover, .btn:hover, a.button:hover, .button:hover, .cta:hover {
+    background: var(--brand-hover) !important;
+    border-color: var(--brand-hover) !important;
+    color: #fff !important;
+}
+a.btn:focus, .btn:focus, a.button:focus, .button:focus {
+    outline: 2px solid var(--brand-hover);
+    outline-offset: 2px;
+}
+
+/* заголовки */
+h1, h2, h3,
+.main-content h1, .main-content h2, .main-content h3{
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    letter-spacing:-0.01em;
+}
+h1, .main-content h1 { font-weight:700; }
+h2, .main-content h2 { font-weight:700; }
+h3, .main-content h3 { font-weight:600; }
+
+/* зображення в контенті */
+.main-content img:not(.no-resize){
+    display:block; margin:12px auto; max-width:75%; height:auto;
+}
+@media (max-width:768px){
+    .main-content img:not(.no-resize){ max-width:100%; }
+}
+.main-content p > img:not(.no-resize),
+.main-content figure > img:not(.no-resize){
+    display:block; margin:12px auto; max-width:75%; height:auto;
+}
+@media (max-width:768px){
+    .main-content p > img:not(.no-resize),
+    .main-content figure > img:not(.no-resize){ max-width:100%; }
+}
+
+/* іконки в заголовках */
+h1 > img.icon, h2 > img.icon, h3 > img.icon{
+    display:inline-block !important; vertical-align:middle;
+    margin:0 .5rem 0 0; width:1.6em !important; height:auto !important;
+    float:none !important; border:0 !important; box-shadow:none !important; background:transparent !important;
+}
+
+/* рамка картинкам з readme-assets */
+.main-content img[src*="readme-assets/"]{
+    box-sizing:border-box; border:1.5px solid #dfe6ed; border-radius:6px; background:#fff;
+    box-shadow:0 1px 2px rgba(0,0,0,.06), 0 6px 20px rgba(0,0,0,.06);
+}
+
+/* відступи після заголовків у контенті */
+:root{ --h-mb-lg:1.25rem; --h-mb:1rem; --h-mb-sm:.75rem; }
+.main-content h1{ margin-bottom:var(--h-mb-lg) !important; }
+.main-content h2{ margin-bottom:var(--h-mb-lg) !important; }
+.main-content h3{ margin-bottom:var(--h-mb) !important; }
+.main-content h4, .main-content h5, .main-content h6{ margin-bottom:var(--h-mb-sm) !important; }
+@media (max-width:768px){
+    .main-content h1, .main-content h2{ margin-bottom:1rem !important; }
+}
+
+/* H4 стиль */
+.main-content h4, .page-content h4, .markdown h4, .markdown-body h4, article h4{
+    font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    font-weight:600 !important; font-size:1rem !important; line-height:1.4 !important; color:#111117 !important;
+    text-transform:none !important; letter-spacing:0 !important;
+    padding-top:0 !important; padding-bottom:0 !important;
+    border:0 !important; background:transparent !important; box-shadow:none !important; border-radius:0 !important;
+    margin-top:1.1rem !important; margin-bottom:.7rem !important;
+}
+.main-content h4 > span, .main-content h4 > .label, .main-content h4 > .badge{
+    all:unset; font:inherit !important;
+}
+
+/* картки/утиліти */
+.grid{display:grid;gap:16px}
+@media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
+.card{background:#fff;border:1px solid #e6e8ef;border-radius:16px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#6b7280}
+.card h3{margin:.25rem 0 0;font-size:20px;line-height:1.2}
+.card p{margin:.5rem 0 0;color:#4b5563}
+.actions{display:flex;gap:8px;align-items:center;margin-top:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:12px;text-decoration:none}
+.btn-primary{background:#5b5bd6;color:#fff}
+.btn-primary:hover{background:#4d4dc2}
+.btn-secondary{border:1px solid #e6e8ef;color:#111827}
+.btn-secondary:hover{background:#f8fafc}
+.badge{font-size:11px;border:1px solid #e6e8ef;border-radius:999px;padding:4px 8px;color:#374151}
+
+/* ---- тонкий скролбар: додаємо html і точніші таргети ---- */
+:root{
+    --scrollbar-w: 4px;
+    --scrollbar-track: transparent;
+    --scrollbar-thumb: #c7ced9;
+    --scrollbar-thumb-hover: #aab4c2;
+}
+
+/* Firefox */
+html, body,
+.side-bar, .side-bar nav, .side-bar .nav-list{
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* Chromium/WebKit */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.side-bar::-webkit-scrollbar,
+.side-bar nav::-webkit-scrollbar,
+.side-bar .nav-list::-webkit-scrollbar{
+    width: var(--scrollbar-w);
+    height: var(--scrollbar-w);
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+.side-bar::-webkit-scrollbar-track,
+.side-bar nav::-webkit-scrollbar-track,
+.side-bar .nav-list::-webkit-scrollbar-track{
+    background: var(--scrollbar-track);
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+.side-bar::-webkit-scrollbar-thumb,
+.side-bar nav::-webkit-scrollbar-thumb,
+.side-bar .nav-list::-webkit-scrollbar-thumb{
+    background: var(--scrollbar-thumb);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+.side-bar::-webkit-scrollbar-thumb:hover,
+.side-bar nav::-webkit-scrollbar-thumb:hover,
+.side-bar .nav-list::-webkit-scrollbar-thumb:hover{
+    background: var(--scrollbar-thumb-hover);
+}
